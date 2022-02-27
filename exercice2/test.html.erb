@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+    <h1>test！！！！！！！！！！！！！</h1>
+    <% require 'pg' %>
+    <% connection = PG::connect(dbname: "goya") %>
+    <% connection.internal_encoding = "UTF-8" %>
+    <form action="indicate.cgi" method="POST">
+       Veuillez saisir la chaîne <br><br>
+      <input type="text"  name="input" > <br>
+      <input type="submit" name="Send" >
+    </form>
+      <!-- <% result = connection.exec("select weight, give_for from crops where give_for != '自家消費';") %>  -->
+      <!-- <% data = [] %>   -->
+      <!-- <% result.each do |record| %>  -->
+        <!-- <%  data << "The size of bitter gourd ：#{record["weight"]}　Sold to ：#{record["give_for"]}" %>   -->
+        <!-- <% end %>   -->
+
+
+        <!--<% result2 = connection.exec("select weight, give_for, quality from crops where quality = 'f';") %> -->
+        <!-- <% data2 = [] %> -->
+        <!-- <% result2.each do |record| %> -->
+          <!--  <%  data2 << "The size of bitter gourd ：#{record["weight"]}　Sold to ：#{record["give_for"]} Quality : #{record["quality"]}" %> -->
+          <!-- <% end %> -->
+
+    <form action="goya.cgi" method="POST">
+      Cliquez sur le bouton ci-dessous pour passer à la page d'information où le "give_for" n'est pas "self-consumption" !<br><br>  
+        <!-- Remplacez la valeur par les données que vous voulez envoyer. -->
+        <!-- Utiliser le nom = "goya" comme marqueur d'information  -->
+        <input type="text" name="goya" value="<%= data.join(' ') %>">  
+        <input type="submit" name="Send" > <br><br> 
+      
+    </form>
+
+    <form action="goya2.cgi" method="POST">
+      
+      Cliquez sur le bouton ci-dessous pour passer à la page d'information des données avec la mauvaise qualité !<br><br>
+      <input type="text" name="goya2" value="<%= data.join(' ') %>">
+      <input type="submit" name="Send" >
+    </form>
+    
+
+  </body>
+</html>
